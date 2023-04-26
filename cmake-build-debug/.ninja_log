@@ -1,0 +1,9 @@
+# ninja log v5
+5	569	1682457929170386064	CMakeFiles/untitled.dir/SparseTuringMachine.cpp.o	835fb4f8809a11e4
+2	494	1682457929093686722	CMakeFiles/untitled.dir/TuringMachineState.cpp.o	30f1186419b824f1
+517	583	1682515077719225476	untitled	3d74b505d8823785
+2	471	1682459003903513959	CMakeFiles/untitled.dir/Main.cpp.o	5fd8f3db6bd00f72
+6	378	1682515550050579352	build.ninja	39c66833f348ae5
+2	588	1682457929188382187	CMakeFiles/untitled.dir/DenseTuringMachine.cpp.o	bcaf66030081dfc0
+3	532	1682457929132770230	CMakeFiles/untitled.dir/TuringTape.cpp.o	9cfa46aa7c455c0b
+2	515	1682515077643076755	CMakeFiles/untitled.dir/MenuSystem.cpp.o	1af90115fb7b6fe
