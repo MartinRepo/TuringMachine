@@ -17,6 +17,7 @@ public:
     friend std::ostream& operator<<(std::ostream& out,const TuringTape& s);
 private:
     std::vector<int> tape;
+    std::vector<int>::iterator iter;
     int pointer = 0;
     bool isMinusOne = false;
     int size = 10;

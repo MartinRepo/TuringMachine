@@ -1,30 +1,38 @@
 #include "TuringTape.h"
 #include<iostream>
-#include<limits>
+
 TuringTape::TuringTape(int n) {
     if(n!=-1){
         tape.resize(n);
+        iter = tape.begin();
         std::fill(tape.begin(), tape.end(), 0);
     } else {
         tape.resize(10);
+        iter = tape.begin();
         isMinusOne = true;
     }
 }
 
 bool TuringTape::moveRight() {
     if(isMinusOne){
-        //判断指针是否越界，越界再扩容
+        //Check if pointer is out of bound, if yes, expand it.
         if(pointer>tape.size()){
             size+=10;
             tape.resize(size);
         }
-        incrementPosition();
+        pointer++;
+        if(iter!=tape.end()){
+            ++iter;
+        }
         if(pointer<0){
             return false;
         }
         return true;
     } else {
-        incrementPosition();
+        pointer++;
+        if(iter!=tape.end()){
+            ++iter;
+        }
         if(pointer>tape.size() || pointer<0){
             return false;
         }
@@ -38,13 +46,19 @@ bool TuringTape::moveLeft() {
             size+=10;
             tape.resize(size);
         }
-        decreasePosition();
+        pointer--;
+        if(iter!=tape.begin()){
+            --iter;
+        }
         if(pointer<0){
             return false;
         }
         return true;
     } else {
-        decreasePosition();
+        pointer--;
+        if(iter!=tape.begin()){
+            --iter;
+        }
         if(pointer>tape.size() || pointer<0){
             return false;
         }
@@ -54,7 +68,7 @@ bool TuringTape::moveLeft() {
 
 int TuringTape::getContent() const{
     if(pointer<=tape.size() && pointer>=0){
-        return tape[pointer];
+          return *iter;
     } else {
         return 0;
     }
@@ -65,19 +79,12 @@ int TuringTape::getPosition() const{
 }
 
 void TuringTape::setContent(int c) {
-    tape[pointer] = c;
-}
-
-void TuringTape::incrementPosition() {
-    pointer+=1;
-}
-
-void TuringTape::decreasePosition() {
-    pointer-=1;
+        *iter = c;
 }
 
 void TuringTape::setPosition(int newPointer) {
-    pointer=newPointer;
+    iter = tape.begin();
+    iter+=newPointer;
 }
 
 std::ostream& operator<<(std::ostream& out,const TuringTape& s){

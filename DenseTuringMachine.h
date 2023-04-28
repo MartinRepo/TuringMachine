@@ -13,8 +13,7 @@ public:
 private:
     vector<vector<TuringMachineState>> turingMachineStates;
     vector<TuringMachineState> allTuringMachineStates;
-    map<int, TuringMachineState> infiniteTuringMachineStates;
-    vector<TuringMachineState> finalInfiniteTM;
+    vector<TuringMachineState> infiniteTuringMachineStates;
     int trackInfiniteIndex = 0;
     bool isMinusOne = false;
 };

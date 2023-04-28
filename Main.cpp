@@ -123,8 +123,8 @@ int main() {
 //checkThird();
 //checkFourth();
 //checkFifth();
-//checkSixth();
+checkSixth();
 //checkSeventh();
-checkEighth();
+//checkEighth();
 }
 

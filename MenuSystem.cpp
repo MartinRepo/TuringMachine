@@ -18,7 +18,7 @@ void MenuSystem::case1() {
             cout<<"Invalid input, try again"<<endl;
         }
     }
-    // denseTM指针指向新创建的DenseTuringMachine
+    // denseTM pointer point to DenseTuringMachine
     denseTM = new DenseTuringMachine(maxState, maxContent);
 }
 
@@ -51,7 +51,7 @@ void MenuSystem::case3() {
 }
 
 void MenuSystem::case4() {
-    // 获取所有的 TuringMachineStates
+    // get all TuringMachineStates
     std::vector<TuringMachineState>* vecTMStates;
     if(sparseTM != nullptr){
         vecTMStates = sparseTM->getAll();
@@ -96,20 +96,20 @@ void MenuSystem::case4() {
 }
 
 void MenuSystem::findNextState(TuringTape* tape, vector<TuringMachineState>* vec){
-    //寻找下一个状态所在位置
+    // find the location of next state
     int findState = (*vec)[stateLocation].getNextState();
     int findContent = tape->getContent();
     auto it = std::find_if((*vec).begin(), (*vec).end(), [findState, findContent](const TuringMachineState& FindTMState){
         return FindTMState.getCurrentState() == findState && FindTMState.getCurrentContent() == findContent;
     });
     if(it!=(*vec).end()){
-        //找到了，更新location
+        //Find it! update stateLocation.
         stateLocation = std::distance((*vec).begin(), it);
         if(tape->getPosition() > maxPosition){
             maxPosition = tape->getPosition();
         }
     } else {
-        //没找到，error
+        //Can't find, set position -1
         tape->setPosition(-1);
     }
 }
@@ -165,7 +165,7 @@ void MenuSystem::case5(TuringTape* tape) {
         while (steps == -1 || steps-- > 0 || steps==1) {
             currentStep+=1;
             if(sparseTM->find(vec[stateLocation].getCurrentState(), vec[stateLocation].getCurrentContent()) != NULL && tape->getPosition()>-1){
-                //先确定纸带移动方向
+                // Ensure the direction of tape moving
                 if(vec[stateLocation].getMoveDirection()=="->"){
                     tape->moveRight();
                     if(sparseTM->find(vec[stateLocation].getNextState(), tape->getContent()) != NULL){
@@ -176,11 +176,10 @@ void MenuSystem::case5(TuringTape* tape) {
                     } else {
                         tape->setPosition(-1);
                     }
-
                 } else if(vec[stateLocation].getMoveDirection()=="<-"){
                     tape->moveLeft();
                     if(sparseTM->find(vec[stateLocation].getNextState(), tape->getContent()) != NULL){
-                        //改变当前格子内容
+                        //change the content of tape's current position
                         tape->moveRight();
                         tape->setContent(vec[stateLocation].getNextContent());
                         tape->moveLeft();

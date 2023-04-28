@@ -3,6 +3,7 @@
 #include<iostream>
 DenseTuringMachine::DenseTuringMachine(int x, int y){
     if(x==-1 || y==-1){
+        // tape is infinite
         isMinusOne=true;
     } else {
         turingMachineStates.resize(x + 1, std::vector<TuringMachineState>(y + 1, TuringMachineState(-1, -1, -1, -1, "")));
@@ -34,7 +35,7 @@ TuringMachineState* DenseTuringMachine::find(int x, int y) {
 
 void DenseTuringMachine::add(TuringMachineState &s) {
     if(isMinusOne){
-        infiniteTuringMachineStates.insert(pair<int, TuringMachineState>(trackInfiniteIndex, s));
+        infiniteTuringMachineStates.push_back(s);
         trackInfiniteIndex+=1;
     } else {
         if (s.getCurrentState() >= 0 && s.getCurrentState() <= turingMachineStates.size() && s.getCurrentContent() >= 0 && s.getCurrentContent() <= turingMachineStates[0].size()) {
@@ -45,16 +46,13 @@ void DenseTuringMachine::add(TuringMachineState &s) {
 
 std::vector<TuringMachineState> *DenseTuringMachine::getAll() {
     if(isMinusOne){
-        finalInfiniteTM.resize(trackInfiniteIndex, TuringMachineState(-1,-1,-1,-1,""));
-        for(int i = 0; i<trackInfiniteIndex; i++){
-            finalInfiniteTM[i] = infiniteTuringMachineStates[i];
-        }
-        return &finalInfiniteTM;
+          return &infiniteTuringMachineStates;
     } else {
         int z = 0;
         int rows = (int)turingMachineStates.size();
         int columns = (int)turingMachineStates[0].size();
         allTuringMachineStates.resize(rows*columns, TuringMachineState(-1, -1, -1, -1, ""));
+        //move turingmachinestates into vector allTuringMachineStates.
         for (auto& row : turingMachineStates) {
             for (auto& state : row) {
                 if (state.getMoveDirection()!=" ") {
@@ -70,5 +68,6 @@ std::vector<TuringMachineState> *DenseTuringMachine::getAll() {
             }
         }
         return &allTuringMachineStates;
+        // time complexity: xy+xy-h = 2xy-h = O(xy), which h is the number of existed turingmachinestates.
     }
 }
