@@ -103,16 +103,16 @@ void checkEighth(){
         cout<<t.getContent();
     }
     DenseTuringMachine d(-1,-1);
+    TuringMachineState s2(15,16,12,11,"<-");
+    d.add(s2);
     TuringMachineState s1(1,2,3,4,"->");
     d.add(s1);
-    TuringMachineState s2(5,6,7,8,"<-");
-    d.add(s2);
     cout << *d.find(1,2);
-    cout << *d.find(5,6)<<endl;
+    cout << *d.find(15,16)<<endl;
     cout << (d.find(1,3)==NULL)<<endl;
     vector<TuringMachineState> vec=*d.getAll();
     sort(vec.begin(),vec.end(),compareState);
-    for (auto s: vec) cout << s;
+    for (auto s: vec) cout << "<" << s <<">";
     MenuSystem m;
     m.menu();
 }
@@ -123,8 +123,8 @@ int main() {
 //checkThird();
 //checkFourth();
 //checkFifth();
-checkSixth();
+//checkSixth();
 //checkSeventh();
-//checkEighth();
+checkEighth();
 }
 

@@ -7,6 +7,7 @@ TuringTape::TuringTape(int n) {
         iter = tape.begin();
         std::fill(tape.begin(), tape.end(), 0);
     } else {
+        // if enter -1, set initial size of tape = 10
         tape.resize(10);
         iter = tape.begin();
         isMinusOne = true;

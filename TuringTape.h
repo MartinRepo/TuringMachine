@@ -11,8 +11,6 @@ public:
     int getContent() const;
     void setContent(int c);
     int getPosition() const;
-    void incrementPosition();
-    void decreasePosition();
     void setPosition(int newPointer);
     friend std::ostream& operator<<(std::ostream& out,const TuringTape& s);
 private:

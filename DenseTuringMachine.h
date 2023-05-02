@@ -13,8 +13,6 @@ public:
 private:
     vector<vector<TuringMachineState>> turingMachineStates;
     vector<TuringMachineState> allTuringMachineStates;
-    vector<TuringMachineState> infiniteTuringMachineStates;
-    int trackInfiniteIndex = 0;
     bool isMinusOne = false;
 };
 #endif /* DENSETURINGMACHINE_H_ */

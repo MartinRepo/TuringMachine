@@ -42,10 +42,10 @@ void MenuSystem::case3() {
         }
     }
 
-    if(TMState.getCurrentState()>maxState && maxState!=-1){
-        sparseTM->add(TMState);
-    } else {
+    if(denseTM != nullptr){
         denseTM->add(TMState);
+    } else {
+        sparseTM->add(TMState);
     }
 
 }
@@ -225,7 +225,7 @@ void MenuSystem::menu() {
     TuringTape* tape;
     while(true){
         std::cin >> tapeLength;
-        if(tapeLength==0){
+        if(tapeLength==0 || tapeLength<-1){
             cout<<"Invalid input, try it again"<<endl;
         } else {
             tape = new TuringTape(tapeLength);
@@ -279,6 +279,10 @@ void MenuSystem::menu() {
                     break;
                 case 6:
                     // Output current information
+                    if(denseTM== nullptr && sparseTM== nullptr){
+                        std::cout<<"There is no turing machine, create 1 turing machine firstly, plz."<<endl;
+                        break;
+                    }
                     case6(tape);
                     break;
                 default:
